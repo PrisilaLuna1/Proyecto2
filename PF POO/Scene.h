@@ -44,7 +44,7 @@ public:
 	EDXFramework::Model* vaca;
 	EDXFramework::Model* gato;
 
-	EDXFramework::Model* orilla[2];
+	//EDXFramework::Model* orilla[2];
 	EDXFramework::Model* Arana[7];
 
 	Billboard *billBoard[BILLSIZE];
