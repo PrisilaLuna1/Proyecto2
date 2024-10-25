@@ -31,7 +31,7 @@ public:
 	GLfloat AmbMat[4] = { 255, 255, 220, 1 };
 
 	EDXFramework::Model  *PC;
-	EDXFramework::Model* cerca;
+	/*EDXFramework::Model* cerca;*/
 	EDXFramework::Model* trampa;
 	EDXFramework::Model* ficha;
 	EDXFramework::Model* pino;
@@ -70,7 +70,7 @@ public:
 		lago = new Water(hWnd, L"Imagenes//terreno.bmp", L"Imagenes//water1.bmp", 50, 10);
 		terrain = new Terrain(hWnd, L"Imagenes//terreno.bmp", L"Imagenes//test2.jpg", L"Imagenes//test2.jpg", 512, 512);
 		PC = new EDXFramework::Model("Modelos//Laptop//laptop1.obj", "Modelos//Laptop//laptop.bmp", 1);
-		cerca = new EDXFramework::Model("Modelos//cerca//cerca.obj", "Modelos//textures//Image_0.bmp", 1);
+		/*cerca = new EDXFramework::Model("Modelos//cerca//cerca.obj", "Modelos//textures//Image_0.bmp", 1);*/
 		trampa = new EDXFramework::Model("Modelos//trampa//trampa.obj", "Modelos//trampa//Image_1.bmp", 1);
 		ficha = new EDXFramework::Model("Modelos//ficha//ficha.obj", "Modelos//ficha//Image_2.bmp", 1);
 		pino = new EDXFramework::Model("Modelos//pino//pinos.obj", "Modelos//textures//Image_0.bmp", 1);
@@ -212,11 +212,11 @@ public:
 			gato->Draw();
 		glPopMatrix();
 
-		glPushMatrix();
+		/*glPushMatrix();
 			glTranslatef(2, 15.0f, 6);
 			glRotatef(-90, 0, 1, 0);
 			cerca->Draw();
-		glPopMatrix();
+		glPopMatrix();*/
 
 		//glPushMatrix();
 		//	glTranslatef(2, 15.0f, 6);
@@ -254,7 +254,7 @@ public:
 		delete skyDome;
 		delete lago;
 		delete PC;
-		delete cerca;
+		/*delete cerca;*/
 		delete trampa;
 		delete ficha;
 		delete maizal;
