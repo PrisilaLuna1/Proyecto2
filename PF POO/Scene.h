@@ -10,7 +10,10 @@
 #include "Billboard.h"
 #include "Fog.h"
 #include "Camera.h"
-int index = 0;
+int index = 0,indexCat=0;
+int posini = -34;
+bool movingToNegative = true;
+
 
 #define BILLSIZE 50
 
@@ -42,7 +45,11 @@ public:
 	EDXFramework::Model* telarana;
 	EDXFramework::Model* deco;
 	EDXFramework::Model* vaca;
-	EDXFramework::Model* gato;
+	EDXFramework::Model* tronco;
+	EDXFramework::Model* gato[3];
+
+	EDXFramework::Model* casa;
+
 
 	//EDXFramework::Model* orilla[2];
 	EDXFramework::Model* Arana[7];
@@ -81,7 +88,13 @@ public:
 		telarana = new EDXFramework::Model("Modelos//telaraña//web.obj", "Modelos//telaraña//webtext.bmp", 1);
 		deco = new EDXFramework::Model("Modelos//espanta//espantapajaros.obj", "Modelos//textures//Image_0.bmp", 1);
 		vaca = new EDXFramework::Model("Modelos//vaca//vaca.obj", "Modelos//textures//Image_0.bmp", 1);
-		gato = new EDXFramework::Model("Modelos//gato//gato.obj", "Modelos//gato//Image_0.bmp", 1);
+		tronco = new EDXFramework::Model("Modelos//tronco//tronco2.obj", "Modelos//textures//Image_0.bmp", 1);
+		gato[0] = new EDXFramework::Model("Modelos//gato//gato.obj", "Modelos//gato//Image_0.bmp", 1);
+		gato[1] = new EDXFramework::Model("Modelos//gato//gato1.obj", "Modelos//gato//Image_0.bmp", 1);
+		gato[2] = new EDXFramework::Model("Modelos//gato//gato3.obj", "Modelos//gato//Image_0.bmp", 1);
+		gato[3] = new EDXFramework::Model("Modelos//gato//gato2.obj", "Modelos//gato//Image_0.bmp", 1);
+
+		casa = new EDXFramework::Model("Modelos//casa//granero.obj", "Modelos//textures//Image_0.bmp", 1);
 
 		/*orilla[0] = new EDXFramework::Model("Modelos//bridge//puertos.obj", "Modelos//textures//Image_0.bmp", 1);
 		orilla[1] = new EDXFramework::Model("Modelos//bridge//puertos.obj", "Modelos//textures//Image_0.bmp", 1);*/
@@ -154,7 +167,7 @@ public:
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(2.7f, 16, -20);
+			glTranslatef(-40, 16, -41);
 			glScalef(0.01, 0.01, 0.01);
 			ficha->Draw();
 		glPopMatrix();
@@ -166,7 +179,7 @@ public:
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(-42, 16, -24);
+			glTranslatef(-57, 16, -32);
 			//glScalef(0.01, 0.01, 0.01);
 			maizal->Draw();
 		glPopMatrix();
@@ -177,8 +190,15 @@ public:
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(-42, 16, -7);
+			glTranslatef(0.1, 6, 52);
+			glScalef(0.09, 0.09, 0.09);
+			tronco->Draw();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-5, 25, -6);
 			glScalef(6, 6, 6);
+			glRotatef(180, 0, 1, 0);
 			reloj->Draw();
 		glPopMatrix();
 
@@ -189,12 +209,13 @@ public:
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(-42, 20, -10);
+			glTranslatef(-43, 25, -10);
+			glRotatef(90, 0, 1, 0);
 			telarana->Draw();
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(-52, 19, -26);
+			glTranslatef(-52, 19, -27);
 			glScalef(2, 2, 2);
 			//glRotated(175, 0, 1, 0);
 			deco->Draw();
@@ -205,12 +226,35 @@ public:
 			glScalef(5, 5, 5);
 			vaca->Draw();
 		glPopMatrix();
-
+		
+		
 		glPushMatrix();
-			glTranslatef(9, 16, -22);
+		if (indexCat < 4) {
+			
+			glTranslatef(21, 16, posini);
+			/*glTranslatef(21, 16, posini);
+			if (movingToNegative) {
+				glRotatef(0, 0, 1, 0);  
+			}
+			else {
+				glRotatef(180, 0, 1, 0);  
+			}*/
+
 			glScalef(0.009, 0.009, 0.009);
-			gato->Draw();
+			gato[indexCat]->Draw();
+			indexCat++;
+			
+			/*if(posini==-34)*/posini = posini + 0.009;
+
+			if (indexCat == 3) indexCat = 0;  
+			if (posini == -10) {
+				/*posini = posini-2;*/
+				posini = -34;
+			}
+
+		}
 		glPopMatrix();
+
 
 		/*glPushMatrix();
 			glTranslatef(2, 15.0f, 6);
@@ -228,12 +272,19 @@ public:
 		//glPopMatrix();
 
 		glPushMatrix();
+			glTranslatef(-14, 15, -39);
+			glRotatef(90, 0, 1, 0);
+			glScalef(0.25, 0.25, 0.25);
+		casa->Draw();
+		glPopMatrix();
+
+		glPushMatrix();
 			if (index < 8) {
 				glTranslatef(2, 15, 5);
 				Arana[index]->Draw();
 				index++;
 			if (index == 7)index = 0;
-}
+			}
 		glPopMatrix();
 		
 
@@ -265,9 +316,13 @@ public:
 		delete telarana;
 		delete deco;
 		delete vaca;
-		delete gato;
+		delete casa;
+		delete tronco;
 		for (int i = 0; i < 8; i++) {
 			delete Arana[i];
+		}
+		for (int j = 0; j < 3; j++) {
+			delete gato[j];
 		}
 	}
 };
